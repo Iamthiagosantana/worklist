@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: ./backend/WorkList.Api
+      dockerfile: Dockerfile.dev
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5000:8080"
+    volumes:
+      - ./backend/WorkList.Api:/app
+      - /app/bin
+      - /app/obj
+    depends_on:
+      - postgres
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    depends_on:
+      - api
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: worklist
+      POSTGRES_USER: worklist
+      POSTGRES_PASSWORD: worklist
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
