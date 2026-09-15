@@ -7,12 +7,12 @@ public class PasswordHasher : IPasswordHasher
 
     public string Hash(string password)
     {
-        return _hasher.HashPassword(null, password);
+        return _hasher.HashPassword(new object(), password);
     }
 
     public bool Verify(string hash, string password)
     {
-        var result = _hasher.VerifyHashedPassword(null, hash, password);
+        var result = _hasher.VerifyHashedPassword(new object(), hash, password);
 
         return result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded;
     }
