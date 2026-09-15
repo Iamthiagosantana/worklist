@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "watch", "run", "--no-launch-profile", "--urls", "http://0.0.0.0:8080"]
+ENTRYPOINT ["dotnet", "watch", "run", "--non-interactive", "--no-launch-profile", "--urls", "http://0.0.0.0:8080"]

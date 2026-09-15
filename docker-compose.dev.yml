@@ -6,6 +6,11 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=worklist;Username=worklist;Password=worklist"
+      Jwt__Secret: "Hrhlflua5UGW9+EhgTT3MdTkH/Vd0NNMoklJOSh6VEg=
+"
+      Jwt__Issuer: "WorkList"
+      Jwt__Audience: "WorkList"
+      Jwt__ExpirationMinutes: "60"
     ports:
       - "5000:8080"
     volumes:
