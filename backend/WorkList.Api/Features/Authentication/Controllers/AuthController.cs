@@ -33,7 +33,7 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpGet("me")]
-    public async Task<IActionResult> Me()
+    public IActionResult Me()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var username = User.FindFirstValue(ClaimTypes.Name);
