@@ -37,13 +37,11 @@ public class AuthController : ControllerBase
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var username = User.FindFirstValue(ClaimTypes.Name);
-        var email = User.FindFirstValue(ClaimTypes.Email);
 
         return Ok(new
         {
             userId,
-            username,
-            email
+            username
         });
     }
     
