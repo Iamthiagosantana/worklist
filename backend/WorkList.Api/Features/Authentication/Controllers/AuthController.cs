@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WorkList.Api.Features.Authentication.DTOs;
 using WorkList.Api.Features.Authentication.Services;
@@ -27,6 +29,22 @@ public class AuthController : ControllerBase
     {
         var response = await _authService.LoginAsync(loginRequest);
         return Ok(response);
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<IActionResult> Me()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var username = User.FindFirstValue(ClaimTypes.Name);
+        var email = User.FindFirstValue(ClaimTypes.Email);
+
+        return Ok(new
+        {
+            userId,
+            username,
+            email
+        });
     }
     
 }
